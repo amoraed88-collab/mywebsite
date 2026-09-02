@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lilliana - Born for Art</title>
+<meta name="description" content="Lilliana, a modern creative studio dedicated to art and digital design.">
+<style>
+  /* ========== Global Base ========== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: rgba(37, 99, 235, 0.18);
+    --accent: #0ea5e9;
+    --bg: #0f172a;
+    --bg-soft: #111a2c;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #1e293b;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --radius: 16px;
+    --container: 1160px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Section Titles */
+  .section {
+    padding: 96px 0;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 56px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+
+  /* ========== Navbar ========== */
+  .navbar {
+    position: static;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    border-color: var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .brand span {
+    color: var(--primary);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--primary);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff !important;
+    padding: 10px 22px !important;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.2s ease !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .nav-cta::after {
+    display: none;
+  }
+
+  /* Mobile Hamburger */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ========== Hero ========== */
+  .hero {
+    position: relative;
+    background-image: url("images/hero-bg1.jpg");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  /* Left dark gradient overlay for white text readability */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(8,10,15,0.88) 0%, rgba(8,10,15,0.60) 42%, rgba(8,10,15,0.18) 72%, rgba(8,10,15,0) 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    padding: 96px 0 110px;
+  }
+
+  /* Minimal: text directly on dark background, no floating panel */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+
+  .hero-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.22;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .hero h1 .grad {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 520px;
+    margin-bottom: 32px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  /* Outline button on dark hero */
+  .hero .btn-outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+
+  .hero .btn-outline:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  .hero-stats .stat b {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    display: block;
+  }
+
+  .hero-stats .stat span {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* Hero Illustration Card */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+
+  .hero-card .mini-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .mini-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 160px;
+    margin-bottom: 24px;
+  }
+
+  .mini-chart .bar {
+    flex: 1;
+    border-radius: 8px 8px 4px 4px;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    opacity: 0.85;
+    animation: grow 1.2s ease both;
+  }
+
+  .mini-chart .bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+  .mini-chart .bar:nth-child(2) { height: 62%; animation-delay: 0.2s; }
+  .mini-chart .bar:nth-child(3) { height: 48%; animation-delay: 0.3s; }
+  .mini-chart .bar:nth-child(4) { height: 78%; animation-delay: 0.4s; }
+  .mini-chart .bar:nth-child(5) { height: 66%; animation-delay: 0.5s; }
+  .mini-chart .bar:nth-child(6) { height: 92%; animation-delay: 0.6s; }
+  .mini-chart .bar:nth-child(7) { height: 84%; animation-delay: 0.7s; }
+
+  @keyframes grow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+    transform-origin: bottom;
+  }
+
+  .hero-card .mini-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-card .mini-card-footer b {
+    font-size: 22px;
+    color: var(--primary);
+  }
+
+  .hero-card .mini-card-footer span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .float-badge {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .float-badge .check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .float-badge.t1 { top: 30px; left: -10px; }
+  .float-badge.t2 { bottom: 40px; right: -10px; }
+
+  /* ========== About ========== */
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-panel {
+    position: relative;
+  }
+
+  .about-panel .box {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: var(--radius);
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-panel .box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 40%),
+      radial-gradient(circle at 70% 70%, rgba(255,255,255,0.18), transparent 40%);
+  }
+
+  .about-panel .exp-card {
+    position: absolute;
+    bottom: -28px;
+    right: 24px;
+    background: #1e293b;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 18px 26px;
+    text-align: center;
+  }
+
+  .about-panel .exp-card b {
+    font-size: 32px;
+    color: var(--primary);
+    display: block;
+  }
+
+  .about-panel .exp-card span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .about-content h2 {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+
+  .about-content p {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .about-points {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .about-points li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .about-points .icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .about-points b {
+    display: block;
+    font-size: 16px;
+  }
+
+  .about-points p {
+    margin: 2px 0 0;
+    font-size: 14px;
+  }
+
+  /* ========== Product Cards ========== */
+  .products {
+    background: var(--bg-soft);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .product-card {
+    background: #1e293b;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+
+  .product-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .c-blue { background: rgba(59, 130, 246, 0.18); }
+  .c-green { background: rgba(16, 185, 129, 0.18); }
+  .c-orange { background: rgba(249, 115, 22, 0.18); }
+  .c-purple { background: rgba(139, 92, 246, 0.18); }
+  .c-cyan { background: rgba(6, 182, 212, 0.18); }
+  .c-pink { background: rgba(236, 72, 153, 0.18); }
+
+  .product-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .product-card p {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  .product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .product-price small {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .product-link:hover {
+    color: var(--primary-dark);
+  }
+
+  .product-link .arrow {
+    transition: transform 0.25s ease;
+  }
+
+  .product-link:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ========== Gallery ========== */
+  .gallery {
+    background: var(--bg);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .gallery-item {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    aspect-ratio: 3 / 4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  @media (max-width: 1024px) {
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ========== Testimonials ========== */
+.testimonials-viewport {
+  overflow: hidden;
+  height: 500px;
+  position: relative;
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+.testimonials-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  max-width: 640px;
+  margin: 0 auto;
+  animation: scrollUp 55s linear infinite;
+}
+
+.testimonials-viewport:hover .testimonials-track {
+  animation-play-state: paused;
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.testimonial-card {
+  background: #1e293b;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary);
+}
+
+.testimonial-card .t-stars {
+  color: #fbbf24;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.testimonial-card .t-stars .half-star {
+  background: linear-gradient(90deg, #fbbf24 50%, #334155 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.testimonial-card .t-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.testimonial-card .t-text {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .testimonials-track { grid-template-columns: 1fr; }
+  .testimonials-viewport { height: 520px; }
+}
+/* ========== Contact ========== */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .contact-info h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .contact-info > p {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .contact-item .ci-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .contact-item b {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .contact-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .contact-form {
+    background: #1e293b;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg-soft);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    background: #16203a;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-error {
+    font-size: 13px;
+    color: #dc2626;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .form-error.show {
+    display: block;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  .form-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  .form-success.show {
+    display: block;
+  }
+
+  .form-success .ok-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .form-success h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .form-success p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ========== Footer ========== */
+  .footer {
+    background: #0f172a;
+    color: #cbd5e1;
+    padding: 64px 0 0;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.2fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-brand {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand .brand-logo {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+  }
+
+  .footer-col p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .footer-col h4 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul a {
+    font-size: 14px;
+    color: #94a3b8;
+    transition: color 0.25s ease;
+  }
+
+  .footer-col ul a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #64748b;
+  }
+
+  .footer-bottom .socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  .footer-bottom .socials a {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: background 0.25s ease;
+  }
+
+  .footer-bottom .socials a:hover {
+    background: var(--primary);
+  }
+
+  /* ========== Scroll Reveal ========== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========== Responsive: Tablet ========== */
+  @media (max-width: 1024px) {
+    .hero h1 { font-size: 42px; }
+    .hero-inner { padding: 72px 0 90px; gap: 36px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-inner { gap: 40px; }
+  }
+
+  /* ========== Responsive: Mobile ========== */
+  @media (max-width: 768px) {
+    .section { padding: 64px 0; }
+    .section-title { font-size: 27px; }
+    .section-head { margin-bottom: 40px; }
+
+    /* Nav Collapse Menu */
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 12px 24px 24px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-120%);
+      transition: transform 0.35s ease;
+    }
+
+    .nav-links.open {
+      transform: translateY(0);
+    }
+
+    .nav-links a {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--bg-soft);
+    }
+
+    .nav-links a::after { display: none; }
+    .nav-cta { text-align: center; margin-top: 12px; border-bottom: none !important; }
+
+    /* Hero */
+    .hero { background-position: 70% 20%; }
+    .hero::before {
+      background: linear-gradient(180deg, rgba(8,10,15,0.82) 0%, rgba(8,10,15,0.62) 50%, rgba(8,10,15,0.45) 100%);
+    }
+    .hero-content {
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .hero-inner { grid-template-columns: 1fr; padding: 56px 0 72px; text-align: center; }
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 16px; margin-left: auto; margin-right: auto; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .hero-visual { order: -1; }
+    .float-badge.t1 { left: 0; }
+    .float-badge.t2 { right: 0; }
+
+    /* About */
+    .about-inner { grid-template-columns: 1fr; gap: 56px; }
+    .about-content h2 { font-size: 27px; }
+
+    /* Products */
+    .product-grid { grid-template-columns: 1fr; }
+
+    /* Contact */
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form { padding: 24px; }
+
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { justify-content: center; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .hero-stats { gap: 24px; }
+    .hero-stats .stat b { font-size: 24px; }
+    .about-panel .exp-card { right: 8px; bottom: -20px; padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ========== Navbar ========== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-logo">L</span>
+        Lilliana
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#guestbook">Guestbook</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Open Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== Hero ========== -->
+  <section class="hero" id="home">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="hero-badge"><span class="dot"></span> Creative Studio</span>
+        <h1>Born for Art</h1>
+        <div class="hero-btns">
+          <a href="#guestbook" class="btn btn-primary">Leave a Message</a>
+          <a href="#contact" class="btn btn-outline">Contact</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b data-count="1200">0</b><span>+ Happy Clients</span></div>
+          <div class="stat"><b data-count="200">0</b><span>+ Partner Platforms</span></div>
+          <div class="stat"><b data-count="98">0</b><span>% Client Satisfaction</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Gallery ========== -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Gallery</h2>
+        <p class="section-sub">Curated Collection</p>
+      </div>
+      <div class="gallery-grid"><div class="gallery-item reveal"><img src="images/work1.jpg" alt="Work 12"></div><div class="gallery-item reveal"><img src="images/work2.jpg" alt="Work 10"></div><div class="gallery-item reveal"><img src="images/work3.jpg" alt="Work 1"></div><div class="gallery-item reveal"><img src="images/work4.jpg" alt="Work 11"></div><div class="gallery-item reveal"><img src="images/work5.jpg" alt="Work 3"></div><div class="gallery-item reveal"><img src="images/work6.jpg" alt="Work 5"></div><div class="gallery-item reveal"><img src="images/work7.jpg" alt="Work 6"></div><div class="gallery-item reveal"><img src="images/work8.jpg" alt="Work 7"></div><div class="gallery-item reveal"><img src="images/work9.jpg" alt="Work 8"></div><div class="gallery-item reveal"><img src="images/work10.jpg" alt="Work 9"></div><div class="gallery-item reveal"><img src="images/work11.jpg" alt="Work 2"></div><div class="gallery-item reveal"><img src="images/work12.jpg" alt="Work 4"></div></div>
+    </div>
+  </section>
+
+  <div class="guestbook-link-wrap">
+    <a href="https://space.bilibili.com/179669125/favlist?fid=1775195025&ftype=create" target="_blank" rel="noopener" class="guestbook-link bilibili">FOTO01</a>
+    <a href="https://www.pinterest.com/pin/617133955232785831/" target="_blank" rel="noopener" class="guestbook-link pinterest">FOTO02</a>
+  </div>
+
+    <!-- ========== Testimonials ========== -->
+  <section class="section testimonials" id="guestbook">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">Testimonials</h2>
+        <p class="section-sub">What clients say about our design work</p>
+      </div>
+      <div class="testimonials-viewport reveal">
+        <div class="testimonials-track"><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Emma Thompson</div><p class="t-text">Absolutely stunning design! The attention to detail is simply remarkable.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">James Wilson</div><p class="t-text">Best design work I have ever encountered. Truly world-class quality.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Sophia Martinez</div><p class="t-text">The creativity and elegance of this design completely blew me away.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Daniel Brown</div><p class="t-text">Incredible visual design. Every single element feels intentional and perfect.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div><div class="t-name">Olivia Davis</div><p class="t-text">This design is pure art. Beautiful, clean, and genuinely inspiring.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Michael Johnson</div><p class="t-text">Outstanding design quality. The layout and composition are flawless.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Ava Garcia</div><p class="t-text">I am amazed by this design. It feels both modern and timeless.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">William Lee</div><p class="t-text">Phenomenal design work. The color palette and typography are genius.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Isabella Taylor</div><p class="t-text">The design is absolutely gorgeous. Flawless execution from start to finish.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;<span class="half-star">&#9733;</span></div><div class="t-name">Ethan Anderson</div><p class="t-text">This is design excellence. Clean, bold, and beautifully crafted.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Mia Thomas</div><p class="t-text">Stunning design! The spacing, hierarchy, and visuals are all perfect.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Alexander White</div><p class="t-text">Brilliant design. It sets a completely new standard for quality.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Charlotte Harris</div><p class="t-text">The most beautiful design I have ever seen. Simply masterful work.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Benjamin Clark</div><p class="t-text">Exceptional design. Every pixel is clearly crafted with care and passion.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Emma Thompson</div><p class="t-text">Absolutely stunning design! The attention to detail is simply remarkable.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">James Wilson</div><p class="t-text">Best design work I have ever encountered. Truly world-class quality.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Sophia Martinez</div><p class="t-text">The creativity and elegance of this design completely blew me away.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Daniel Brown</div><p class="t-text">Incredible visual design. Every single element feels intentional and perfect.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div><div class="t-name">Olivia Davis</div><p class="t-text">This design is pure art. Beautiful, clean, and genuinely inspiring.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Michael Johnson</div><p class="t-text">Outstanding design quality. The layout and composition are flawless.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Ava Garcia</div><p class="t-text">I am amazed by this design. It feels both modern and timeless.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">William Lee</div><p class="t-text">Phenomenal design work. The color palette and typography are genius.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Isabella Taylor</div><p class="t-text">The design is absolutely gorgeous. Flawless execution from start to finish.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;<span class="half-star">&#9733;</span></div><div class="t-name">Ethan Anderson</div><p class="t-text">This is design excellence. Clean, bold, and beautifully crafted.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Mia Thomas</div><p class="t-text">Stunning design! The spacing, hierarchy, and visuals are all perfect.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Alexander White</div><p class="t-text">Brilliant design. It sets a completely new standard for quality.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Charlotte Harris</div><p class="t-text">The most beautiful design I have ever seen. Simply masterful work.</p></div><div class="testimonial-card"><div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t-name">Benjamin Clark</div><p class="t-text">Exceptional design. Every pixel is clearly crafted with care and passion.</p></div>        </div>
+      </div>
+    </div>
+  </section>
+<!-- ========== Contact ========== -->
+  <section class="section contact" id="contact">
+    <div class="container contact-inner">
+      <div class="contact-info reveal">
+        <span class="section-tag">Contact</span>
+        <h2>Ready to start a collaboration?</h2>
+        <p>Whether it is a product inquiry, custom solution, or business partnership, feel free to reach out. We will get back to you as soon as possible.</p>
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <b>Address</b>
+            <p>武汉市洪山区光谷软件园 A3 栋 8 层</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <b>Phone</b>
+            <p>400-888-6666(Mon-Fri 9:00 - 18:00)</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <b>Email</b>
+            <p>contact@yunqi-tech.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name">
+              <span class="form-error" data-for="name">Please enter your name</span>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+              <span class="form-error" data-for="phone">Please enter a valid phone number</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address">
+            <span class="form-error" data-for="email">Please enter a valid email address</span>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Describe your needs..."></textarea>
+            <span class="form-error" data-for="message">Please enter your message</span>
+          </div>
+          <button type="submit" class="form-submit">Submit</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="ok-icon">✓</div>
+          <h3>Submitted successfully!</h3>
+          <p>Thank you for your message. Our consultant will contact you within 1 business day.</p>
+          <button type="button" class="btn btn-outline" onclick="resetForm()">Write Another</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <span class="brand-logo">L</span> Lilliana
+          </div>
+          <p>A creative studio dedicated to art and digital design, helping every brand achieve creative breakthroughs.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#guestbook">Guestbook</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:4008886666">400-888-6666</a></li>
+            <li><a href="mailto:contact@yunqi-tech.com">contact@yunqi-tech.com</a></li>
+            <li><a href="#contact">武汉市洪山区光谷软件园</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Lilliana Co., Ltd. All rights reserved. 鄂ICP备2026082801号</p>
+        <div class="socials">
+          <a href="#" aria-label="WeChat">💬</a>
+          <a href="#" aria-label="Weibo">📢</a>
+          <a href="#" aria-label="Douyin">📱</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ========== 1. Navbar Scroll Effect ==========
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ========== 2. Mobile Hamburger Menu ==========
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Auto-close after clicking a menu item
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // ========== 3. Scroll Spy Active Section ==========
+    const sections = document.querySelectorAll('section[id]');
+    const menuLinks = navLinks.querySelectorAll('a[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 120;
+      sections.forEach(sec => {
+        if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+          menuLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + sec.id);
+          });
+        }
+      });
+    });
+
+    // ========== 4. Scroll Reveal Animation ==========
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ========== 5. Counter Animation ==========
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 1200;
+        const start = performance.now();
+
+        const step = now => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        };
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(el => counterObserver.observe(el));
+
+    // ========== 6. Contact Form Validation ==========
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    // Real-time validation: clear error on input
+    contactForm.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('input', () => {
+        const err = document.querySelector(`.form-error[data-for="${field.id}"]`);
+        if (err) err.classList.remove('show');
+      });
+    });
+
+    function validateField(field) {
+      const value = field.value.trim();
+      const err = document.querySelector(`.form-error[data-for="${field.id}"]`);
+      let ok = true;
+
+      if (field.id === 'name') ok = value.length >= 2;
+      if (field.id === 'phone') ok = /^1[3-9]\d{9}$/.test(value);
+      if (field.id === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      if (field.id === 'message') ok = value.length >= 5;
+
+      if (!ok && err) err.classList.add('show');
+      return ok;
+    }
+
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      let allValid = true;
+      contactForm.querySelectorAll('input, textarea').forEach(field => {
+        if (!validateField(field)) allValid = false;
+      });
+      if (allValid) {
+        contactForm.style.display = 'none';
+        formSuccess.classList.add('show');
+      }
+    });
+
+    function resetForm() {
+      contactForm.reset();
+      formSuccess.classList.remove('show');
+      contactForm.style.display = 'block';
+    }
+
+    // ========== 8. Footer Year ==========
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
