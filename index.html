@@ -1127,6 +1127,15 @@
     transition: background 0.25s ease, border-color 0.25s ease;
   }
   .lang-btn:hover { background: rgba(255,255,255,0.14); border-color: var(--primary); }
+  .lang-flag { font-size: 15px; line-height: 1; }
+  .lang-caret {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1;
+    margin-left: 2px;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+  .lang-switch.open .lang-caret { transform: rotate(180deg); color: var(--primary); }
   .lang-menu {
     position: absolute; top: calc(100% + 8px); right: 0;
     background: #1e293b; border: 1px solid var(--border); border-radius: 10px;
@@ -1267,10 +1276,19 @@
       </nav>
       <div class="nav-actions">
         <div class="lang-switch" id="langSwitch">
-          <button class="lang-btn" id="langBtn" type="button" aria-label="Switch Language">&#127760; <span id="langLabel">EN</span></button>
+          <button class="lang-btn" id="langBtn" type="button" aria-label="Switch Language">
+            <span class="lang-flag" id="langFlag">&#127468;&#127463;</span>
+            <span id="langLabel">EN</span>
+            <span class="lang-caret" id="langCaret">&#9662;</span>
+          </button>
           <ul class="lang-menu" id="langMenu">
+            <li data-lang="ar">Arabic</li>
+            <li data-lang="nl">Dutch</li>
             <li data-lang="en" class="active">English</li>
-            <li data-lang="zh">&#31616;&#20307;&#20013;&#25991;</li>
+            <li data-lang="fr">French</li>
+            <li data-lang="de">German</li>
+            <li data-lang="it">Italian</li>
+            <li data-lang="zh">ZH-CN</li>
           </ul>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Open Menu">
@@ -1630,13 +1648,210 @@
         foot_quick: "快速链接", foot_home: "首页", foot_guestbook: "留言板", foot_contact: "联系我们",
         foot_contact_h: "联系我们", foot_addr: "武汉市洪山区光谷软件园",
         foot_rights: "版权所有"
+      },
+      ar: {
+        nav_home: "الرئيسية", nav_guestbook: "سجل الزوار", nav_contact: "اتصل بنا", nav_cta: "تواصل معنا",
+        hero_badge: "استوديو إبداعي", hero_title: "وُلدت للفن",
+        hero_btn1: "اترك رسالة", hero_btn2: "اتصل بنا",
+        stat_clients: "+ عملاء سعداء", stat_platforms: "+ منصات شريكة", stat_satisfaction: "% رضا العملاء",
+        gallery_title: "معرض الأعمال", gallery_sub: "مجموعة مختارة",
+        test_title: "آراء العملاء", test_sub: "ماذا يقول العملاء عن أعمالنا",
+        test1: "تصميم مذهل! الاهتمام بالتفاصيل رائع بكل بساطة.",
+        test2: "أفضل عمل تصميم رأيته على الإطلاق. جودة عالمية حقيقية.",
+        test3: "الإبداع والأناقة في هذا التصميم أبهراني تمامًا.",
+        test4: "تصميم بصري مذهل. كل عنصر يبدو مقصودًا ومثاليًا.",
+        test5: "هذا التصميم فن خالص. جميل ونظيف وملهم حقًا.",
+        test6: "جودة تصميم استثنائية. التخطيط والتكوين مثاليان.",
+        test7: "أنا مندهش من هذا التصميم. إنه حديث وخالد في آن واحد.",
+        test8: "عمل تصميم رائع. لوحة الألوان والخطوط عبقرية.",
+        test9: "التصميم جميل للغاية. تنفيذ مثالي من البداية إلى النهاية.",
+        test10: "هذا هو التميز في التصميم. نظيف وجريء ومصقول.",
+        test11: "تصميم مذهل! المسافات والتسلسل البصري كلها مثالية.",
+        test12: "تصميم لامع. يضع معيارًا جديدًا تمامًا للجودة.",
+        test13: "أجمل تصميم رأيته في حياتي. عمل فني بامتياز.",
+        test14: "تصميم استثنائي. كل بكسل مصنوع بعناية وشغف.",
+        contact_tag: "اتصل بنا", contact_h2: "مستعد لبدء التعاون؟",
+        contact_p: "سواء كان استفسارًا عن منتج أو حلًا مخصصًا أو شراكة عمل، لا تتردد في التواصل معنا. سنرد عليك في أقرب وقت.",
+        contact_addr_label: "العنوان", contact_addr: "الطابق 8، مبنى A3، حديقة وادي البصريات، هونغشان، ووهان",
+        contact_phone_label: "الهاتف", contact_phone: "400-888-6666 (الإثنين - الجمعة 9:00 - 18:00)",
+        contact_email_label: "البريد الإلكتروني",
+        f_name: "الاسم", f_name_ph: "أدخل اسمك", f_name_err: "يرجى إدخال اسمك",
+        f_phone: "الهاتف", f_phone_ph: "أدخل رقم هاتفك", f_phone_err: "يرجى إدخال رقم هاتف صحيح",
+        f_email: "البريد الإلكتروني", f_email_ph: "أدخل بريدك الإلكتروني", f_email_err: "يرجى إدخال بريد إلكتروني صحيح",
+        f_msg: "الرسالة", f_msg_ph: "صف احتياجاتك...", f_msg_err: "يرجى إدخال رسالتك",
+        f_submit: "إرسال",
+        succ_h3: "تم الإرسال بنجاح!", succ_p: "شكرًا لرسالتك. سيتواصل معك مستشارنا خلال يوم عمل واحد.", succ_btn: "اكتب رسالة أخرى",
+        foot_desc: "استوديو إبداعي مكرس للفن والتصميم الرقمي، يساعد كل علامة تجارية على تحقيق اختراقات إبداعية.",
+        foot_quick: "روابط سريعة", foot_home: "الرئيسية", foot_guestbook: "سجل الزوار", foot_contact: "اتصل بنا",
+        foot_contact_h: "اتصل بنا", foot_addr: "حديقة وادي البصريات، هونغشان، ووهان",
+        foot_rights: "جميع الحقوق محفوظة"
+      },
+      nl: {
+        nav_home: "Home", nav_guestbook: "Gastenboek", nav_contact: "Contact", nav_cta: "Neem contact op",
+        hero_badge: "Creatieve Studio", hero_title: "Geboren voor Kunst",
+        hero_btn1: "Laat een bericht achter", hero_btn2: "Contact",
+        stat_clients: "+ Tevreden klanten", stat_platforms: "+ Partnerplatforms", stat_satisfaction: "% Klanttevredenheid",
+        gallery_title: "Galerij", gallery_sub: "Samengestelde Collectie",
+        test_title: "Klantrecensies", test_sub: "Wat klanten zeggen over ons ontwerpwerk",
+        test1: "Absoluut verbluffend ontwerp! De aandacht voor detail is buitengewoon.",
+        test2: "Het beste ontwerpwerk dat ik ooit heb gezien. Echt wereldklasse.",
+        test3: "De creativiteit en elegantie van dit ontwerp hebben me volledig verrast.",
+        test4: "Ongelooflijk visueel ontwerp. Elk element voelt doelbewust en perfect.",
+        test5: "Dit ontwerp is pure kunst. Mooi, strak en echt inspirerend.",
+        test6: "Uitstekende ontwerpkwaliteit. De lay-out en compositie zijn foutloos.",
+        test7: "Ik ben verbaasd over dit ontwerp. Het voelt zowel modern als tijdloos.",
+        test8: "Fenomenaal ontwerpwerk. Het kleurenpalet en de typografie zijn geniaal.",
+        test9: "Het ontwerp is absoluut prachtig. Feilloze uitvoering van begin tot eind.",
+        test10: "Dit is ontwerpexcellentie. Strak, gedurfd en prachtig gemaakt.",
+        test11: "Verbluffend ontwerp! De ruimtes, hiërarchie en visuals zijn allemaal perfect.",
+        test12: "Briljant ontwerp. Het zet een compleet nieuwe standaard voor kwaliteit.",
+        test13: "Het mooiste ontwerp dat ik ooit heb gezien. Gewoon meesterlijk werk.",
+        test14: "Uitzonderlijk ontwerp. Elke pixel is met zorg en passie gemaakt.",
+        contact_tag: "Contact", contact_h2: "Klaar om een samenwerking te starten?",
+        contact_p: "Of het nu een productvraag, maatwerkoplossing of zakelijk partnerschap is, neem gerust contact op. We reageren zo snel mogelijk.",
+        contact_addr_label: "Adres", contact_addr: "Verdieping 8, Gebouw A3, Optics Valley Software Park, Hongshan, Wuhan",
+        contact_phone_label: "Telefoon", contact_phone: "400-888-6666 (ma-vr 9:00 - 18:00)",
+        contact_email_label: "E-mail",
+        f_name: "Naam", f_name_ph: "Vul uw naam in", f_name_err: "Voer uw naam in",
+        f_phone: "Telefoon", f_phone_ph: "Vul uw telefoonnummer in", f_phone_err: "Voer een geldig telefoonnummer in",
+        f_email: "E-mail", f_email_ph: "Vul uw e-mailadres in", f_email_err: "Voer een geldig e-mailadres in",
+        f_msg: "Bericht", f_msg_ph: "Beschrijf uw behoeften...", f_msg_err: "Voer uw bericht in",
+        f_submit: "Verzenden",
+        succ_h3: "Succesvol verzonden!", succ_p: "Bedankt voor uw bericht. Onze adviseur neemt binnen 1 werkdag contact met u op.", succ_btn: "Nog een bericht",
+        foot_desc: "Een creatieve studio gewijd aan kunst en digitaal ontwerp, die elk merk helpt creatieve doorbraken te bereiken.",
+        foot_quick: "Snelle links", foot_home: "Home", foot_guestbook: "Gastenboek", foot_contact: "Contact",
+        foot_contact_h: "Contact", foot_addr: "Optics Valley Software Park, Hongshan, Wuhan",
+        foot_rights: "Alle rechten voorbehouden"
+      },
+      fr: {
+        nav_home: "Accueil", nav_guestbook: "Livre d'or", nav_contact: "Contact", nav_cta: "Contactez-nous",
+        hero_badge: "Studio Créatif", hero_title: "Né pour l'Art",
+        hero_btn1: "Laisser un message", hero_btn2: "Contact",
+        stat_clients: "+ Clients satisfaits", stat_platforms: "+ Plateformes partenaires", stat_satisfaction: "% Satisfaction client",
+        gallery_title: "Galerie", gallery_sub: "Collection choisie",
+        test_title: "Témoignages", test_sub: "Ce que les clients disent de notre travail",
+        test1: "Un design absolument époustouflant ! L'attention aux détails est remarquable.",
+        test2: "Le meilleur travail de design que j'aie jamais vu. Une qualité vraiment mondiale.",
+        test3: "La créativité et l'élégance de ce design m'ont complètement bluffé.",
+        test4: "Un design visuel incroyable. Chaque élément semble intentionnel et parfait.",
+        test5: "Ce design est de l'art pur. Beau, épuré et vraiment inspirant.",
+        test6: "Une qualité de design exceptionnelle. La mise en page et la composition sont impeccables.",
+        test7: "Je suis émerveillé par ce design. Il est à la fois moderne et intemporel.",
+        test8: "Un travail de design phénoménal. La palette de couleurs et la typographie sont géniales.",
+        test9: "Le design est absolument magnifique. Une exécution irréprochable de bout en bout.",
+        test10: "C'est l'excellence du design. Épuré, audacieux et magnifiquement réalisé.",
+        test11: "Un design époustouflant ! L'espacement, la hiérarchie et les visuels sont parfaits.",
+        test12: "Un design brillant. Il établit une toute nouvelle norme de qualité.",
+        test13: "Le plus beau design que j'aie jamais vu. Un travail tout simplement magistral.",
+        test14: "Un design exceptionnel. Chaque pixel est créé avec soin et passion.",
+        contact_tag: "Contact", contact_h2: "Prêt à démarrer une collaboration ?",
+        contact_p: "Qu'il s'agisse d'une demande de produit, d'une solution personnalisée ou d'un partenariat commercial, n'hésitez pas à nous contacter. Nous vous répondrons dans les plus brefs délais.",
+        contact_addr_label: "Adresse", contact_addr: "8e étage, Bâtiment A3, Optics Valley Software Park, Hongshan, Wuhan",
+        contact_phone_label: "Téléphone", contact_phone: "400-888-6666 (lun-ven 9:00 - 18:00)",
+        contact_email_label: "E-mail",
+        f_name: "Nom", f_name_ph: "Entrez votre nom", f_name_err: "Veuillez entrer votre nom",
+        f_phone: "Téléphone", f_phone_ph: "Entrez votre numéro de téléphone", f_phone_err: "Veuillez entrer un numéro de téléphone valide",
+        f_email: "E-mail", f_email_ph: "Entrez votre adresse e-mail", f_email_err: "Veuillez entrer une adresse e-mail valide",
+        f_msg: "Message", f_msg_ph: "Décrivez vos besoins...", f_msg_err: "Veuillez entrer votre message",
+        f_submit: "Envoyer",
+        succ_h3: "Envoyé avec succès !", succ_p: "Merci pour votre message. Notre conseiller vous contactera sous 1 jour ouvré.", succ_btn: "Écrire un autre",
+        foot_desc: "Un studio créatif dédié à l'art et au design numérique, aidant chaque marque à réaliser des percées créatives.",
+        foot_quick: "Liens rapides", foot_home: "Accueil", foot_guestbook: "Livre d'or", foot_contact: "Contact",
+        foot_contact_h: "Contact", foot_addr: "Optics Valley Software Park, Hongshan, Wuhan",
+        foot_rights: "Tous droits réservés"
+      },
+      de: {
+        nav_home: "Startseite", nav_guestbook: "Gästebuch", nav_contact: "Kontakt", nav_cta: "Kontakt aufnehmen",
+        hero_badge: "Kreativstudio", hero_title: "Für Kunst geboren",
+        hero_btn1: "Nachricht hinterlassen", hero_btn2: "Kontakt",
+        stat_clients: "+ Zufriedene Kunden", stat_platforms: "+ Partnerplattformen", stat_satisfaction: "% Kundenzufriedenheit",
+        gallery_title: "Galerie", gallery_sub: "Kuratierte Sammlung",
+        test_title: "Kundenstimmen", test_sub: "Was Kunden über unsere Arbeit sagen",
+        test1: "Absolut atemberaubendes Design! Die Liebe zum Detail ist bemerkenswert.",
+        test2: "Die beste Designarbeit, die ich je gesehen habe. Wirklich Weltklasse.",
+        test3: "Die Kreativität und Eleganz dieses Designs haben mich völlig umgehauen.",
+        test4: "Unglaubliches visuelles Design. Jedes Element wirkt beabsichtigt und perfekt.",
+        test5: "Dieses Design ist pure Kunst. Schön, klar und wirklich inspirierend.",
+        test6: "Herausragende Designqualität. Layout und Komposition sind makellos.",
+        test7: "Ich bin erstaunt über dieses Design. Es wirkt sowohl modern als auch zeitlos.",
+        test8: "Phänomenale Designarbeit. Farbpalette und Typografie sind genial.",
+        test9: "Das Design ist absolut wunderschön. Fehlerfreie Umsetzung von Anfang bis Ende.",
+        test10: "Das ist Design-Exzellenz. Sauber, mutig und wunderschön gefertigt.",
+        test11: "Atemberaubendes Design! Abstände, Hierarchie und Visuals sind perfekt.",
+        test12: "Brillantes Design. Es setzt einen völlig neuen Qualitätsstandard.",
+        test13: "Das schönste Design, das ich je gesehen habe. Einfach meisterhaft.",
+        test14: "Außergewöhnliches Design. Jedes Pixel ist mit Sorgfalt und Leidenschaft gefertigt.",
+        contact_tag: "Kontakt", contact_h2: "Bereit, eine Zusammenarbeit zu starten?",
+        contact_p: "Ob Produktanfrage, maßgeschneiderte Lösung oder Geschäftspartnerschaft – kontaktieren Sie uns gerne. Wir melden uns schnellstmöglich.",
+        contact_addr_label: "Adresse", contact_addr: "8. Etage, Gebäude A3, Optics Valley Software Park, Hongshan, Wuhan",
+        contact_phone_label: "Telefon", contact_phone: "400-888-6666 (Mo-Fr 9:00 - 18:00)",
+        contact_email_label: "E-Mail",
+        f_name: "Name", f_name_ph: "Geben Sie Ihren Namen ein", f_name_err: "Bitte geben Sie Ihren Namen ein",
+        f_phone: "Telefon", f_phone_ph: "Geben Sie Ihre Telefonnummer ein", f_phone_err: "Bitte geben Sie eine gültige Telefonnummer ein",
+        f_email: "E-Mail", f_email_ph: "Geben Sie Ihre E-Mail-Adresse ein", f_email_err: "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        f_msg: "Nachricht", f_msg_ph: "Beschreiben Sie Ihre Anforderungen...", f_msg_err: "Bitte geben Sie Ihre Nachricht ein",
+        f_submit: "Senden",
+        succ_h3: "Erfolgreich gesendet!", succ_p: "Vielen Dank für Ihre Nachricht. Unser Berater meldet sich innerhalb von 1 Werktag.", succ_btn: "Noch eine schreiben",
+        foot_desc: "Ein kreatives Studio für Kunst und digitales Design, das jeder Marke zu kreativen Durchbrüchen verhilft.",
+        foot_quick: "Schnelllinks", foot_home: "Startseite", foot_guestbook: "Gästebuch", foot_contact: "Kontakt",
+        foot_contact_h: "Kontakt", foot_addr: "Optics Valley Software Park, Hongshan, Wuhan",
+        foot_rights: "Alle Rechte vorbehalten"
+      },
+      it: {
+        nav_home: "Home", nav_guestbook: "Libro degli ospiti", nav_contact: "Contatti", nav_cta: "Contattaci",
+        hero_badge: "Studio Creativo", hero_title: "Nato per l'Arte",
+        hero_btn1: "Lascia un messaggio", hero_btn2: "Contatti",
+        stat_clients: "+ Clienti soddisfatti", stat_platforms: "+ Piattaforme partner", stat_satisfaction: "% Soddisfazione clienti",
+        gallery_title: "Galleria", gallery_sub: "Collezione curata",
+        test_title: "Testimonianze", test_sub: "Cosa dicono i clienti del nostro lavoro",
+        test1: "Design assolutamente sbalorditivo! L'attenzione ai dettagli è notevole.",
+        test2: "Il miglior lavoro di design che abbia mai visto. Qualità davvero mondiale.",
+        test3: "La creatività e l'eleganza di questo design mi hanno completamente stupito.",
+        test4: "Design visivo incredibile. Ogni elemento sembra intenzionale e perfetto.",
+        test5: "Questo design è arte pura. Bello, pulito e davvero ispirante.",
+        test6: "Qualità di design eccezionale. Layout e composizione sono impeccabili.",
+        test7: "Sono stupito da questo design. Sembra allo stesso tempo moderno e senza tempo.",
+        test8: "Lavoro di design fenomenale. La palette di colori e la tipografia sono geniali.",
+        test9: "Il design è assolutamente stupendo. Esecuzione impeccabile dall'inizio alla fine.",
+        test10: "Questa è eccellenza nel design. Pulito, audace e splendidamente realizzato.",
+        test11: "Design sbalorditivo! Spaziatura, gerarchia e visual sono tutti perfetti.",
+        test12: "Design brillante. Stabilisce uno standard completamente nuovo di qualità.",
+        test13: "Il design più bello che abbia mai visto. Semplicemente un lavoro magistrale.",
+        test14: "Design eccezionale. Ogni pixel è creato con cura e passione.",
+        contact_tag: "Contatti", contact_h2: "Pronto a iniziare una collaborazione?",
+        contact_p: "Che si tratti di una richiesta di prodotto, di una soluzione personalizzata o di una partnership commerciale, non esitare a contattarci. Ti risponderemo il prima possibile.",
+        contact_addr_label: "Indirizzo", contact_addr: "8° piano, Edificio A3, Optics Valley Software Park, Hongshan, Wuhan",
+        contact_phone_label: "Telefono", contact_phone: "400-888-6666 (lun-ven 9:00 - 18:00)",
+        contact_email_label: "Email",
+        f_name: "Nome", f_name_ph: "Inserisci il tuo nome", f_name_err: "Inserisci il tuo nome",
+        f_phone: "Telefono", f_phone_ph: "Inserisci il tuo numero di telefono", f_phone_err: "Inserisci un numero di telefono valido",
+        f_email: "Email", f_email_ph: "Inserisci il tuo indirizzo email", f_email_err: "Inserisci un indirizzo email valido",
+        f_msg: "Messaggio", f_msg_ph: "Descrivi le tue esigenze...", f_msg_err: "Inserisci il tuo messaggio",
+        f_submit: "Invia",
+        succ_h3: "Inviato con successo!", succ_p: "Grazie per il tuo messaggio. Il nostro consulente ti contatterà entro 1 giorno lavorativo.", succ_btn: "Scrivi un altro",
+        foot_desc: "Uno studio creativo dedicato all'arte e al design digitale, che aiuta ogni marchio a raggiungere traguardi creativi.",
+        foot_quick: "Link rapidi", foot_home: "Home", foot_guestbook: "Libro degli ospiti", foot_contact: "Contatti",
+        foot_contact_h: "Contatti", foot_addr: "Optics Valley Software Park, Hongshan, Wuhan",
+        foot_rights: "Tutti i diritti riservati"
       }
     };
 
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
     const langLabel = document.getElementById('langLabel');
+    const langFlag = document.getElementById('langFlag');
+    const langCaret = document.getElementById('langCaret');
+    const langSwitch = document.getElementById('langSwitch');
     const langItems = langMenu.querySelectorAll('li');
+    const langFlags = {
+      en: '&#127468;&#127463;',
+      zh: '&#127470;&#127475;',
+      ar: '&#127480;&#127462;',
+      nl: '&#127475;&#127473;',
+      fr: '&#127467;&#127479;',
+      de: '&#127465;&#127466;',
+      it: '&#127470;&#127481;'
+    };
 
     function setLang(lang) {
       const dict = i18n[lang] || i18n.en;
@@ -1648,7 +1863,9 @@
         const key = el.getAttribute('data-i18n-ph');
         if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
       });
-      langLabel.textContent = lang === 'zh' ? '中文' : 'EN';
+      const langLabels = { en: 'EN', zh: '中文', ar: 'AR', nl: 'NL', fr: 'FR', de: 'DE', it: 'IT' };
+      langLabel.textContent = langLabels[lang] || lang.toUpperCase();
+      langFlag.innerHTML = langFlags[lang] || '&#127468;&#127463;';
       document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
       langItems.forEach(li => li.classList.toggle('active', li.dataset.lang === lang));
       try { localStorage.setItem('lilliana_lang', lang); } catch (e) {}
@@ -1657,20 +1874,26 @@
     langBtn.addEventListener('click', e => {
       e.stopPropagation();
       langMenu.classList.toggle('open');
+      langSwitch.classList.toggle('open', langMenu.classList.contains('open'));
     });
     langItems.forEach(li => {
       li.addEventListener('click', () => {
         setLang(li.dataset.lang);
         langMenu.classList.remove('open');
+        langSwitch.classList.remove('open');
       });
     });
     document.addEventListener('click', e => {
-      if (!document.getElementById('langSwitch').contains(e.target)) langMenu.classList.remove('open');
+      if (!document.getElementById('langSwitch').contains(e.target)) {
+        langMenu.classList.remove('open');
+        langSwitch.classList.remove('open');
+      }
     });
 
     let savedLang = null;
     try { savedLang = localStorage.getItem('lilliana_lang'); } catch (e) {}
-    setLang(savedLang === 'zh' ? 'zh' : 'en');
+    const validLangs = ['en', 'zh', 'ar', 'nl', 'fr', 'de', 'it'];
+    setLang(validLangs.includes(savedLang) ? savedLang : 'en');
     // ========== 8. Footer Year ==========
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
