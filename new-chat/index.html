@@ -1127,7 +1127,19 @@
     transition: background 0.25s ease, border-color 0.25s ease;
   }
   .lang-btn:hover { background: rgba(255,255,255,0.14); border-color: var(--primary); }
-  .lang-flag { font-size: 15px; line-height: 1; }
+  .lang-flag {
+    display: inline-block; width: 22px; height: 15px;
+    background-size: cover; background-position: center;
+    border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,0.18);
+    flex-shrink: 0;
+  }
+  .flag-ar { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='20' fill='%23165d31'/><text x='15' y='10' font-size='6' fill='%23ffffff' text-anchor='middle'>&#1575;&#1604;&#1604;&#1607;</text><rect x='9' y='13' width='12' height='1.6' fill='%23ffffff'/></svg>"); }
+  .flag-nl { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='6.67' fill='%23ae1c28'/><rect y='6.67' width='30' height='6.66' fill='%23ffffff'/><rect y='13.33' width='30' height='6.67' fill='%2321468b'/></svg>"); }
+  .flag-gb { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='20' fill='%23012169'/><path d='M0,0 L30,20 M30,0 L0,20' stroke='%23ffffff' stroke-width='3.5'/><path d='M0,0 L30,20 M30,0 L0,20' stroke='%23c8102e' stroke-width='1.5'/><path d='M15,0 v20 M0,10 h30' stroke='%23ffffff' stroke-width='5'/><path d='M15,0 v20 M0,10 h30' stroke='%23c8102e' stroke-width='2.8'/></svg>"); }
+  .flag-fr { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='10' height='20' fill='%230055a4'/><rect x='10' width='10' height='20' fill='%23ffffff'/><rect x='20' width='10' height='20' fill='%23ef4135'/></svg>"); }
+  .flag-de { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='6.67' fill='%23000000'/><rect y='6.67' width='30' height='6.66' fill='%23dd0000'/><rect y='13.33' width='30' height='6.67' fill='%23ffce00'/></svg>"); }
+  .flag-it { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='10' height='20' fill='%23009b48'/><rect x='10' width='10' height='20' fill='%23ffffff'/><rect x='20' width='10' height='20' fill='%23d52b1e'/></svg>"); }
+  .flag-zh { background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='20' fill='%23de2910'/><path d='M4.5,3.5 L5.6,6.3 L8.6,6.3 L6.2,8.1 L7.1,11 L4.5,9.3 L1.9,11 L2.8,8.1 L0.4,6.3 L3.4,6.3 Z' fill='%23ffde00'/><path d='M11,4 L11.5,5.2 L12.8,5.2 L11.8,6 L12.1,7.2 L11,6.4 L9.9,7.2 L10.2,6 L9.2,5.2 L10.5,5.2 Z' fill='%23ffde00'/><path d='M11,7.5 L11.5,8.7 L12.8,8.7 L11.8,9.5 L12.1,10.7 L11,9.9 L9.9,10.7 L10.2,9.5 L9.2,8.7 L10.5,8.7 Z' fill='%23ffde00'/><path d='M13.5,5.2 L14,6.4 L15.3,6.4 L14.3,7.2 L14.6,8.4 L13.5,7.6 L12.4,8.4 L12.7,7.2 L11.7,6.4 L13,6.4 Z' fill='%23ffde00'/><path d='M13.5,9 L14,10.2 L15.3,10.2 L14.3,11 L14.6,12.2 L13.5,11.4 L12.4,12.2 L12.7,11 L11.7,10.2 L13,10.2 Z' fill='%23ffde00'/></svg>"); }
   .lang-caret {
     font-size: 12px;
     color: var(--text-muted);
@@ -1138,18 +1150,29 @@
   .lang-switch.open .lang-caret { transform: rotate(180deg); color: var(--primary); }
   .lang-menu {
     position: absolute; top: calc(100% + 8px); right: 0;
-    background: #1e293b; border: 1px solid var(--border); border-radius: 10px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5); min-width: 150px; padding: 6px;
+    background: #1e293b; border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5); min-width: 225px; padding: 9px;
     display: none; z-index: 300; list-style: none;
   }
   .lang-menu.open { display: block; animation: langIn 0.18s ease; }
   @keyframes langIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
   .lang-menu li {
-    padding: 9px 12px; font-size: 14px; color: var(--text-muted);
-    cursor: pointer; border-radius: 7px; transition: background 0.2s ease, color 0.2s ease;
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 15px; font-size: 14px; color: var(--text-muted);
+    cursor: pointer; border-radius: 8px; transition: background 0.2s ease, color 0.2s ease;
   }
+  .lang-menu li + li { margin-top: 2px; }
   .lang-menu li:hover { background: var(--primary-light); color: var(--text); }
-  .lang-menu li.active { color: var(--primary); font-weight: 600; }
+  .lang-menu li.active { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+  .mi-flag {
+    display: inline-block; width: 24px; height: 16px;
+    background-size: cover; background-position: center;
+    border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,0.18);
+    flex-shrink: 0;
+  }
+  .mi-code { font-weight: 700; color: var(--text); min-width: 26px; }
+  .mi-name { color: var(--text-muted); }
+  .lang-menu li.active .mi-name { color: var(--primary); }
   @media (max-width: 768px) {
     .nav-actions { gap: 6px; }
     .lang-btn { padding: 8px 10px; }
@@ -1277,18 +1300,18 @@
       <div class="nav-actions">
         <div class="lang-switch" id="langSwitch">
           <button class="lang-btn" id="langBtn" type="button" aria-label="Switch Language">
-            <span class="lang-flag" id="langFlag">&#127468;&#127463;</span>
+            <span class="lang-flag flag-gb" id="langFlag"></span>
             <span id="langLabel">EN</span>
             <span class="lang-caret" id="langCaret">&#9662;</span>
           </button>
           <ul class="lang-menu" id="langMenu">
-            <li data-lang="ar">Arabic</li>
-            <li data-lang="nl">Dutch</li>
-            <li data-lang="en" class="active">English</li>
-            <li data-lang="fr">French</li>
-            <li data-lang="de">German</li>
-            <li data-lang="it">Italian</li>
-            <li data-lang="zh">ZH-CN</li>
+            <li data-lang="ar"><span class="mi-flag flag-ar"></span><span class="mi-code">AR</span><span class="mi-name">Arabic</span></li>
+            <li data-lang="nl"><span class="mi-flag flag-nl"></span><span class="mi-code">NL</span><span class="mi-name">Dutch</span></li>
+            <li data-lang="en" class="active"><span class="mi-flag flag-gb"></span><span class="mi-code">EN</span><span class="mi-name">English</span></li>
+            <li data-lang="fr"><span class="mi-flag flag-fr"></span><span class="mi-code">FR</span><span class="mi-name">French</span></li>
+            <li data-lang="de"><span class="mi-flag flag-de"></span><span class="mi-code">DE</span><span class="mi-name">German</span></li>
+            <li data-lang="it"><span class="mi-flag flag-it"></span><span class="mi-code">IT</span><span class="mi-name">Italian</span></li>
+            <li data-lang="zh"><span class="mi-flag flag-zh"></span><span class="mi-code">ZH</span><span class="mi-name">ZH-CN</span></li>
           </ul>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Open Menu">
@@ -1844,13 +1867,13 @@
     const langSwitch = document.getElementById('langSwitch');
     const langItems = langMenu.querySelectorAll('li');
     const langFlags = {
-      en: '&#127468;&#127463;',
-      zh: '&#127470;&#127475;',
-      ar: '&#127480;&#127462;',
-      nl: '&#127475;&#127473;',
-      fr: '&#127467;&#127479;',
-      de: '&#127465;&#127466;',
-      it: '&#127470;&#127481;'
+      en: 'flag-gb',
+      zh: 'flag-zh',
+      ar: 'flag-ar',
+      nl: 'flag-nl',
+      fr: 'flag-fr',
+      de: 'flag-de',
+      it: 'flag-it'
     };
 
     function setLang(lang) {
@@ -1865,7 +1888,7 @@
       });
       const langLabels = { en: 'EN', zh: '中文', ar: 'AR', nl: 'NL', fr: 'FR', de: 'DE', it: 'IT' };
       langLabel.textContent = langLabels[lang] || lang.toUpperCase();
-      langFlag.innerHTML = langFlags[lang] || '&#127468;&#127463;';
+      langFlag.className = 'lang-flag ' + (langFlags[lang] || 'flag-gb');
       document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
       langItems.forEach(li => li.classList.toggle('active', li.dataset.lang === lang));
       try { localStorage.setItem('lilliana_lang', lang); } catch (e) {}
